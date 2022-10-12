@@ -24,10 +24,6 @@ output "invitation_url" {
   value = zipmap([for test in azuread_invitation.test : test.user_display_name], [for test in azuread_invitation.test : test.redeem_url])
 }
 
-#This output block is required to add users to an Azure AD group
-output "userids" {
-  value = toset([for test in azuread_invitation.test : test.user_id])
-}
 
 /*
 Source 1: https://stackoverflow.com/questions/64989080/terraform-modules-output-from-for-each

@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
+      source = "hashicorp/azurerm"
       #version = "3.19.1"
     }
   }
@@ -28,4 +28,11 @@ resource "azurerm_subnet" "test" {
   resource_group_name  = data.azurerm_resource_group.test.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
+}
+
+output "VNET_name" {
+  value = azurerm_virtual_network.vnet.name
+}
+output "subnet_name" {
+  value = azurerm_subnet.test.name
 }

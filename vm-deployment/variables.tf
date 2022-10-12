@@ -66,7 +66,7 @@ variable "passwd" {
   }
 }
 
-# license_type should be "Windows_Server" if Azure Hybrid Benefit is needed
+# license_type should be "Windows_Server" for Azure Hybrid Benefit and for PAYG it should be "None"
 variable "license_type" {
   description = "Azure Hybrid Benefit for Windows status"
   type        = string
@@ -105,6 +105,17 @@ variable "vrsn" {
 
 variable "dataDiskSize" {
   description = "VM datadisk size in GB"
+  type        = number
+  default     = null
+}
+
+variable "shutdown_timezone" {
+  description = "Auto-shutdown timezone for the Azure VM"
+  type        = string
+  default     = null
+}
+variable "shutdown_time" {
+  description = "Must match the format HHmm where HH is 00-23 and mm is 00-59 (e.g. 0930, 2300, etc.)"
   type        = number
   default     = null
 }

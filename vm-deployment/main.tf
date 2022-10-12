@@ -86,18 +86,10 @@ resource "azurerm_managed_disk" "datadisk" {
   tags                 = var.resource_tags
 }
 
-#Using splat expression
-resource "azurerm_virtual_machine_data_disk_attachment" "diskattach" {
-  managed_disk_id    = azurerm_managed_disk.datadisk[*].id
-  virtual_machine_id = azurerm_windows_virtual_machine.winvm.id
-  lun                = count.index
-  caching            = "ReadWrite"
-}
-
 resource "azurerm_virtual_machine_data_disk_attachment" "diskattach" {
   managed_disk_id    = azurerm_managed_disk.datadisk[count.index].id
   virtual_machine_id = azurerm_windows_virtual_machine.winvm.id
-  lun                = count.index
+  lun                = count.index+1
   caching            = "ReadWrite"
   count              = 1
 }
